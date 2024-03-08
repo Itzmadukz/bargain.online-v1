@@ -1,12 +1,19 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const path = require('path');
-const { logger } = require('./middleware/logger');
+const { logger, logEvents } = require('./middleware/logger');
 const errorLogger = require('./middleware/errorLogger');
 const cookieParser = require('cookie-parser')
 const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
+const mongoose = require('mongoose')
+const connectDB = require('./config/dbConn');
 const PORT = process.env.PORT || 3000
+
+console.log(process.env.NODE_ENV)
+
+connectDB()
 
 app.use(logger)
 
@@ -26,5 +33,6 @@ app.use('/', require('./routes/root'))
 
 //error logs
 app.use(errorLogger)
+
 
 app.listen(PORT, () => console.log(`server running on port ${PORT}`))
