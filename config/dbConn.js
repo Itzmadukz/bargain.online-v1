@@ -7,10 +7,22 @@ const connectDB = async () => {
             console.log('db connected')
         })
         .catch(err => {
-            console.log(err)
+            console.log("db Connection Error", err)
             logEvents(`${err.no}: ${err}\t${err.syscall}\t${err.hostname}`,
                 'mongoErrLog.log')
         })
 }
 
-module.exports = connectDB
+const disconnectDB = async () => {
+    mongoose.disconnect()
+        .then(() => {
+            console.log('db Disconnected')
+        })
+        .catch(err => {
+            console.log("db Disconnection Error", err)
+            logEvents(`${err.no}: ${err}\t${err.syscall}\t${err.hostname}`,
+                'mongoErrLog.log')
+        })
+}
+
+module.exports = { connectDB, disconnectDB }
