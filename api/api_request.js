@@ -1,9 +1,10 @@
 import { getJson } from "serpapi";
 
+const input = process.argv[2]
 
 
 // Walmart HTTP request
-export const wmData = async (query) => {
+const wmData = async (query) => {
   try {
     const response = await getJson({
       api_key: "90e28590f54081d77fe7791875f314266693fdd4a2087690eee4ba5552a0c922",
@@ -25,7 +26,7 @@ export const wmData = async (query) => {
 
 
 // Target HTTP request
-export const getData = async (search_term) => {
+const getData = async (search_term) => {
   try {
     const params = {
       api_key: "7CA441521C124D01AB9BDB949EFA82C3",
@@ -49,5 +50,10 @@ export const getData = async (search_term) => {
   }
 };
 
-  
-  
+wmData(input)
+
+getData(input)
+
+
+
+

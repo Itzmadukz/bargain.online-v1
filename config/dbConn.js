@@ -1,8 +1,10 @@
+require('dotenv').config()
 const mongoose = require("mongoose");
 const { logEvents } = require("../middleware/logger");
+const URI = process.env.URI
 
 const connectDB = async () => {
-    mongoose.connect('mongodb://127.0.0.1:27017/bargain-test')
+    mongoose.connect(URI)
         .then(() => {
             console.log('db connected')
         })
